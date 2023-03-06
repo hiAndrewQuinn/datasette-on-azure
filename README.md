@@ -19,7 +19,9 @@ az group create \
     --name datasette-rg \
     --location westeurope
 ```
+
 Creating the storage account:
+
 ```bash
 az storage account create \
     --name datasettestorage \
@@ -27,7 +29,9 @@ az storage account create \
     --resource-group datasette-rg \
     --sku Standard_LRS
 ```
-Creating the function app. The name here is the name that will be exposed in the default URL, so it needs to be globally unique - unlike the storage account and resource group which only have to be unique within your Azure account.
+
+Creating the function app. The name here is the name that will be exposed in the default URL, so it needs to be globally unique - unlike the storage account and resource group which only have to be unique within your Azure account
+
 ```bash
 az functionapp create \
     --resource-group datasette-rg \
@@ -39,7 +43,9 @@ az functionapp create \
     --os-type linux \
     --name azure-functions-datasette
 ```
-Finally, deploy the application like so:
-```bash
-func azure functionapp publish azure-functions-datasette
-```
+
+In Simon's original draft, there's an explicit `publish` step, but with Functions version 4 it looks like that might no longer be necessary? Well I'm up and running at https://azure-functions-datasette.azurewebsites.net/ in any case now.
+
+Will return tomorrow to keep at it.
+
+===
