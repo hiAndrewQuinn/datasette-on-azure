@@ -33,7 +33,7 @@ az functionapp create \
     --resource-group datasette-rg \
     --consumption-plan-location westeurope \
     --runtime python \
-    --runtime-version 3.11 \
+    --runtime-version 3.10 \
     --functions-version 4 \
     --storage-account datasettestorage \
     --os-type linux \
