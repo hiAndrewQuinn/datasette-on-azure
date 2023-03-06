@@ -14,13 +14,13 @@ I found that the resource group needed to be in `westeurope` for functions to wo
 
 Creating the resource group:
 
-```
+```bash
 az group create \
     --name datasette-rg \
     --location westeurope
 ```
 Creating the storage account:
-```
+```bash
 az storage account create \
     --name datasettestorage \
     --location westeurope \
@@ -28,7 +28,7 @@ az storage account create \
     --sku Standard_LRS
 ```
 Creating the function app. The name here is the name that will be exposed in the default URL, so it needs to be globally unique - unlike the storage account and resource group which only have to be unique within your Azure account.
-```
+```bash
 az functionapp create \
     --resource-group datasette-rg \
     --consumption-plan-location westeurope \
@@ -40,6 +40,6 @@ az functionapp create \
     --name azure-functions-datasette
 ```
 Finally, deploy the application like so:
-```
+```bash
 func azure functionapp publish azure-functions-datasette
 ```
