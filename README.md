@@ -46,6 +46,54 @@ az functionapp create \
 
 In Simon's original draft, there's an explicit `publish` step, but with Functions version 4 it looks like that might no longer be necessary? Well I'm up and running at https://azure-functions-datasette.azurewebsites.net/ in any case now.
 
+```bash
+curl https://azure-functions-datasette.azurewebsites.net/
+```
+
 Will return tomorrow to keep at it.
 
 ===
+
+We'll need both `az` and `func` for this next part.
+
+These commmands will fill `loca.settings.json` with the right
+stuff to get started.
+
+```bash
+func azure functionapp fetch-app-settings azure-functions-datasette
+func azure storage fetch-connection-string datasettestorage
+```
+
+We get a "referenced bundle does not meet required minimum version"
+error, and this means we need to change something in `host.json`.
+
+... Gah, now `func start` works but we're getting a bunch of errors.
+Seems like we'll need a venv.
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+... close... I think I need to install the things in `requirements.txt`
+as well. We can use pipenv for that.
+
+```bash
+# If you're on Ubuntu, remove the apt version, it's way too old
+# and will probably throw a weird mutablemapping error
+sudo apt remove pipenv
+pip install pipenv
+
+pipenv install
+pipenv shell
+
+func start
+```
+
+Hell yeah! No errors!!
+
+Finally let's publish it.
+
+```bash
+func azure functionapp publish azure-functions-datasette
+```
